@@ -4,7 +4,7 @@ int_t encontraMax(real_t **A, int_t i, int_t n){
     real_t max = 0;
     int_t iPivo = i;
 
-    for (int j = 0; j < n; i++) {
+    for (int j = 0; j < n; j++) {
         if (ABS(A[i][j]) > max) {
             max = ABS(A[i][j]);
             iPivo = i;
@@ -13,13 +13,29 @@ int_t encontraMax(real_t **A, int_t i, int_t n){
 
 }
 
+// Troca a linha i pela linha iPivo
+void trocaLinha(real_t **A, real_t *b, int_t i, int_t iPivo, int_t n){
+    real_t aux = 0;
+    for (int j = 0; j < n; j++) {
+        aux = A[i][j];
+        A[i][j] = A[iPivo][j];
+        A[iPivo][j] = aux;
+    }
+
+    aux = b[i];
+    b[i] = b[iPivo];
+    b[iPivo] = aux; // Adicionado para completar a troca
+}
+
 void eliminacaoGaussPivoteamento(real_t **A, real_t *b, int_t n){
+    
+    printf("EG clássico:\n");
     
     for (int i=0; i < n; i++) {
         int_t iPivo = encontraMax(A, i, n);
         
         if(i != iPivo)
-            // trocaLinha(A, b, i, iPivo, n);
+            trocaLinha(A, b, i, iPivo, \n);
 
         for (int k = i+1; k < n; k++){
             real_t m = A[k][i] / A[i][i];
@@ -60,6 +76,6 @@ void imprimeEntrada(real_t **A, real_t *b, int_t n){
     for(int i = 0; i < n; i++){
         printf("%lf |", b[i]);
     }
-    printf("\n----------------------------------------\n");
+    printf("\n----------------------------------------\n\n");
 
 }

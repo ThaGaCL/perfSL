@@ -20,9 +20,9 @@ int main(int argc, char *argv[]){
     leEntrada(A, b, n);
     imprimeEntrada(A, b, n);
 
-    // eliminacaoGaussPivoteamento(A, b, n);
-    // imprimeEntrada(A, b, n);
-    
+    eliminacaoGaussPivoteamento(A, b, n);
+    imprimeEntrada(A, b, n);
+
     return 0;
 
 }
