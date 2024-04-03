@@ -1,6 +1,6 @@
 # PROGRAMA
     PROG = perfSL
-    OBJS = main.o perfSL.o utils.o
+    OBJS = main.o perfSL.o utils.o matrix.o
 
 # Compilador
     CC     = gcc

@@ -10,9 +10,13 @@ int_t encontraMax(real_t **A, int_t i, int_t n);
 
 void eliminacaoGaussPivoteamento(real_t **A, real_t *b, int_t n);
 
-void leEntrada(real_t **A, real_t *b, int_t n);
+void retrosSubs(real_t **A, real_t *b, real_t *x, int_t n);
 
-void imprimeEntrada(real_t **A, real_t *b, int_t n);
+void iterativoGaussSeidel(real_t **A, real_t *b, real_t *x, int_t n, real_t tol, int_t maxIter);
+
+void eliminacaoGaussTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, int_t n);
+
+
 
 
 #endif
