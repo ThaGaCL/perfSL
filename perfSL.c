@@ -156,7 +156,7 @@ void gaussSeidelTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, real_t *
 {
     printf("GS tridiagonal [ %ld iterações ]:\n", maxIter);
     real_t erro = 1.0 + tol;
-    while (erro < tol && maxIter > 0)
+    while (erro < tol || maxIter > 0)
     {
         x[0] = (b[0] - c[0] * x[1]) / d[0];
         for (int i = 1; i < n - 1; ++i)

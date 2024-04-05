@@ -69,6 +69,8 @@ int main(int argc, char *argv[])
     
     copiaEntrada(A, b, Ac, bc, n);
 
+    separaDiagonal(Ac, d, a, c, n);
+
     gaussSeidelTridiagonal(a, d, c, x3, bc, n, 0.0001, 50);
     calculaResiduo(Ac, x3, bc, r3, n);
     imprimeSaida(x3, n, r3);
@@ -88,6 +90,6 @@ int main(int argc, char *argv[])
     free(c);
     free(d);
     
-    
+
     return 0;
 }
