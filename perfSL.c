@@ -2,6 +2,9 @@
 #include "utils.h"
 #include "matrix.h"
 
+#define TOLE 0.0001
+#define MAXITER 50
+
 int_t encontraMax(real_t **A, int_t i, int_t n)
 {
     real_t max = 0;
@@ -62,7 +65,7 @@ void eliminacaoGaussPivoteamento(real_t **A, real_t *b, int_t n)
 
 void retrosSubs(real_t **A, real_t *b, real_t *x, int_t n)
 {
-    printf("RS:\n");
+    // printf("RS:\n");
     for (int i = n - 1; i >= 0; i--)
     {
         x[i] = b[i];
@@ -76,7 +79,7 @@ void retrosSubs(real_t **A, real_t *b, real_t *x, int_t n)
 
 void iterativoGaussSeidel(real_t **A, real_t *b, real_t *x, int_t n, real_t tol, int_t maxIter)
 {
-    printf("IGS:\n");
+    printf("GS classico [ %ld iterações ]:\n", maxIter);
     real_t *x0 = malloc(n * sizeof(real_t));
     real_t erro = tol + 1;
     int_t iter = 0;
@@ -109,6 +112,17 @@ void iterativoGaussSeidel(real_t **A, real_t *b, real_t *x, int_t n, real_t tol,
     free(x0);
 }
 
+real_t *separaDiagonal(real_t **A, int_t n)
+{
+    real_t *d = malloc(n * sizeof(real_t));
+    for (int i = 0; i < n; i++)
+    {
+        d[i] = A[i][i];
+        A[i][i] = 0;
+    }
+    return d;
+}
+
 void eliminacaoGaussTridiagonal(real_t *d, real_t *a, real_t *c, real_t *x, int_t n)
 {
     printf("EG tridiagonal:\n");
@@ -119,5 +133,18 @@ void eliminacaoGaussTridiagonal(real_t *d, real_t *a, real_t *c, real_t *x, int_
         a[i] = 0.0;
         d[i+1] -= m * c[i];
         x[i+1] -= m * x[i];
+    }
+}
+
+real_t calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n) {
+    int_t i, j;
+    real_t soma;
+
+    for(i = 0; i < n; i++) {
+        soma = 0.0;
+        for(j = 0; j < n; j++) {
+            soma += A[i][j] * x[j];
+        }
+        residuo[i] = b[i] - soma;
     }
 }

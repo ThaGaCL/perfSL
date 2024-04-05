@@ -50,3 +50,24 @@ void copiaEntrada(real_t **A, real_t *b, real_t **Ac, real_t *bc, int_t n){
         bc[i] = b[i];
     }
 }
+
+void imprimeSaida(real_t *x, int_t n, real_t *res){
+    // printf("Vetor x:\n");
+    for(int i = 0; i < n; i++){
+        printf("%lf ", x[i]);
+    }
+    printf("\n");
+    // printf("\n\nResíduo: \n\n");
+    for(int i = 0; i < n; i++){
+        printf("%lf ", res[i]);
+    }
+    printf("\n");
+}
+
+void liberaMemoria(real_t **A, real_t *b, int_t n){
+    for (int i = 0; i < n; i++) {
+        free(A[i]);
+    }
+    free(A);
+    free(b);
+}

@@ -16,7 +16,10 @@ void iterativoGaussSeidel(real_t **A, real_t *b, real_t *x, int_t n, real_t tol,
 
 void eliminacaoGaussTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, int_t n);
 
+void gaussSeidelTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, real_t *d, int_t n, real_t tol, int_t maxIter);
 
+real_t *separaDiagonal(real_t **A, int_t n);
 
+real_t calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n);
 
 #endif
