@@ -39,14 +39,21 @@ int main(int argc, char *argv[]){
     copiaEntrada(A, b, Ac, bc, n);
 
     // GS - Iterativo
-    real_t *x1 = malloc(n * sizeof(real_t));
-    iterativoGaussSeidel(A, b, x1, n, 0.0001, 50);
-    calculaResiduo(A, x1, b, r, n);
-    imprimeSaida(x1, n, r);
+    // real_t *x1 = malloc(n * sizeof(real_t));
+    // iterativoGaussSeidel(A, b, x1, n, 0.0001, 50);
+    // calculaResiduo(A, x1, b, r, n);
+    // imprimeSaida(x1, n, r);
     // imprimeEntrada(A, x1, n);
 
 
     // EG - TRIDIAGONAL
+    // Vetores diagonais
+    real_t *c = malloc((n-1) * sizeof(real_t));
+    real_t *d = malloc(n * sizeof(real_t));
+    real_t *a = malloc((n-1) * sizeof(real_t));
+
+    separaDiagonal(A, d, a, c, n);
+
     // eliminacaoGaussTridiagonal(A, b, n);
     // imprimeEntrada(A, b, n);
 
@@ -54,7 +61,7 @@ int main(int argc, char *argv[]){
     liberaMemoria(A, b, n);
     liberaMemoria(Ac, bc, n);
     free(x);
-    free(x1);
+    // free(x1);
 
     return 0;
 

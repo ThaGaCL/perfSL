@@ -112,15 +112,26 @@ void iterativoGaussSeidel(real_t **A, real_t *b, real_t *x, int_t n, real_t tol,
     free(x0);
 }
 
-real_t *separaDiagonal(real_t **A, int_t n)
+real_t *separaDiagonal(real_t **A, real_t *d, real_t *a, real_t *c, int_t n)
 {
-    real_t *d = malloc(n * sizeof(real_t));
     for (int i = 0; i < n; i++)
     {
-        d[i] = A[i][i];
-        A[i][i] = 0;
+        for (int j = 0; j < n; j++)
+        {
+            if (i == j)
+            {
+                d[i] = A[i][j];
+            }
+            else if (i == j - 1)
+            {
+                c[i] = A[i][j];
+            }
+            else if (i == j + 1)
+            {
+                a[i - 1] = A[i][j];
+            }
+        }
     }
-    return d;
 }
 
 void eliminacaoGaussTridiagonal(real_t *d, real_t *a, real_t *c, real_t *x, int_t n)
@@ -131,18 +142,21 @@ void eliminacaoGaussTridiagonal(real_t *d, real_t *a, real_t *c, real_t *x, int_
     {
         real_t m = a[i] / d[i];
         a[i] = 0.0;
-        d[i+1] -= m * c[i];
-        x[i+1] -= m * x[i];
+        d[i + 1] -= m * c[i];
+        x[i + 1] -= m * x[i];
     }
 }
 
-real_t calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n) {
+real_t calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n)
+{
     int_t i, j;
     real_t soma;
 
-    for(i = 0; i < n; i++) {
+    for (i = 0; i < n; i++)
+    {
         soma = 0.0;
-        for(j = 0; j < n; j++) {
+        for (j = 0; j < n; j++)
+        {
             soma += A[i][j] * x[j];
         }
         residuo[i] = b[i] - soma;
