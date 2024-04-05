@@ -4,7 +4,8 @@
 #include "perfSL.h"
 #include "matrix.h"
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
     int_t n;
     real_t **A, *b;
     real_t **Ac, *bc;
@@ -18,25 +19,25 @@ int main(int argc, char *argv[]){
     Ac = criaMatriz(n);
     bc = criaVetor(n);
 
-
     leEntrada(A, b, n);
+
     // imprimeEntrada(A, b, n);
 
-    copiaEntrada(A, b, Ac, bc, n);
+    // copiaEntrada(A, b, Ac, bc, n);
 
     // EG - Pivoteamento
-    eliminacaoGaussPivoteamento(Ac, bc, n);
-    // imprimeEntrada(Ac, bc, n);
+    // eliminacaoGaussPivoteamento(Ac, bc, n);
+    // // imprimeEntrada(Ac, bc, n);
 
-    // Vetor solucao
+    // // Vetor solucao
     real_t *x = malloc(n * sizeof(real_t));
     real_t *r = malloc(n * sizeof(real_t));
-    retrosSubs(Ac, bc, x, n);
-    calculaResiduo(A, x, b, r, n);
-    imprimeSaida(x, n, r);
+    // retrosSubs(Ac, bc, x, n);
+    // calculaResiduo(A, x, b, r, n);
+    // imprimeSaida(x, n, r);
 
-    copiaEntrada(A, b, Ac, bc, n);
-    copiaEntrada(A, b, Ac, bc, n);
+    // copiaEntrada(A, b, Ac, bc, n);
+    // copiaEntrada(A, b, Ac, bc, n);
 
     // GS - Iterativo
     // real_t *x1 = malloc(n * sizeof(real_t));
@@ -45,18 +46,19 @@ int main(int argc, char *argv[]){
     // imprimeSaida(x1, n, r);
     // imprimeEntrada(A, x1, n);
 
-
     // EG - TRIDIAGONAL
     // Vetores diagonais
-    real_t *c = malloc((n-1) * sizeof(real_t));
+    real_t *c = malloc((n - 1) * sizeof(real_t));
     real_t *d = malloc(n * sizeof(real_t));
-    real_t *a = malloc((n-1) * sizeof(real_t));
+    real_t *a = malloc((n - 1) * sizeof(real_t));
 
     separaDiagonal(A, d, a, c, n);
 
-    // eliminacaoGaussTridiagonal(A, b, n);
+    eliminacaoGaussTridiagonal(d, a, c, b, x, n);
+    
     // imprimeEntrada(A, b, n);
-
+    // calculaResiduo(A, x, b, r, n);
+    imprimeSaida(x, n, r);
     // Libera memoria alocada
     liberaMemoria(A, b, n);
     liberaMemoria(Ac, bc, n);
@@ -64,6 +66,4 @@ int main(int argc, char *argv[]){
     // free(x1);
 
     return 0;
-
 }
-

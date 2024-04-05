@@ -134,17 +134,22 @@ real_t *separaDiagonal(real_t **A, real_t *d, real_t *a, real_t *c, int_t n)
     }
 }
 
-void eliminacaoGaussTridiagonal(real_t *d, real_t *a, real_t *c, real_t *x, int_t n)
+void eliminacaoGaussTridiagonal(real_t *d, real_t *a, real_t *c, real_t *b, real_t *x, int_t n)
 {
     printf("EG tridiagonal:\n");
-    // para cada linha
-    for (int i = 0; i < n; i++)
+
+    // TRIANGULARIZAÇÃO: 5(n-1) operações
+    for (int i = 0; i < n - 1; ++i)
     {
-        real_t m = a[i] / d[i];
+        double m = a[i] / d[i];
         a[i] = 0.0;
-        d[i + 1] -= m * c[i];
-        x[i + 1] -= m * x[i];
+        d[i + 1] -= c[i] * m;
+        b[i + 1] -= b[i] * m;
     }
+    // RETROSUBSTITUIÇÃO: ≈ 3n operações (n grande)
+    x[n - 1] = b[n - 1] / d[n - 1];
+    for (int i = n - 2; i >= 0; --i)
+        x[i] = (b[i] - c[i] * x[i + 1]) / d[i];
 }
 
 real_t calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n)

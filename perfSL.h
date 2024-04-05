@@ -14,7 +14,7 @@ void retrosSubs(real_t **A, real_t *b, real_t *x, int_t n);
 
 void iterativoGaussSeidel(real_t **A, real_t *b, real_t *x, int_t n, real_t tol, int_t maxIter);
 
-void eliminacaoGaussTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, int_t n);
+void eliminacaoGaussTridiagonal(real_t *d, real_t *a, real_t *c, real_t *b, real_t *x, int_t n);
 
 void gaussSeidelTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, real_t *d, int_t n, real_t tol, int_t maxIter);
 
