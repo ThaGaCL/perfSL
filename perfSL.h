@@ -20,6 +20,6 @@ void gaussSeidelTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, real_t *
 
 real_t *separaDiagonal(real_t **A, real_t *d, real_t *a, real_t *c, int_t n);
 
-real_t calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n);
+void calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n);
 
 #endif

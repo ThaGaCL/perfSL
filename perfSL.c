@@ -152,23 +152,48 @@ void eliminacaoGaussTridiagonal(real_t *d, real_t *a, real_t *c, real_t *b, real
         x[i] = (b[i] - c[i] * x[i + 1]) / d[i];
 }
 
+real_t maxNorm(real_t *x, real_t *old_x, int_t n)
+{
+    real_t max = 0;
+    for (int i = 0; i < n; i++)
+    {
+        real_t diff = ABS(x[i] - old_x[i]);
+        if (diff > max)
+        {
+            max = diff;
+        }
+    }
+    return max;
+}
+
 void gaussSeidelTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, real_t *d, int_t n, real_t tol, int_t maxIter)
 {
     printf("GS tridiagonal [ %ld iterações ]:\n", maxIter);
     real_t erro = 1.0 + tol;
-    while (erro < tol || maxIter > 0)
+    real_t *old_x = malloc(n * sizeof(real_t));
+
+    while (erro < tol && maxIter > 0)
     {
+        for (int_t i = 0; i < n; i++)
+        {
+            old_x[i] = x[i];
+        }
         x[0] = (b[0] - c[0] * x[1]) / d[0];
         for (int i = 1; i < n - 1; ++i)
-
+        {
             x[i] = (b[i] - a[i - 1] * x[i - 1] - c[i] * x[i + 1]) / d[i];
+        }
 
         x[n - 1] = (b[n - 1] - a[n - 2] * x[n - 2]) / d[n - 1];
         maxIter--;
+
+        // Calcula erro == norma máxima de ( x^(k) – x^(k-1) )
+        erro = maxNorm(x, old_x, n);
+        printf("Erro: %f\n", erro);
     }
 }
 
-real_t calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n)
+void calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n)
 {
     int_t i, j;
     real_t soma;
