@@ -11,6 +11,8 @@ int main(int argc, char *argv[])
     real_t **A, *b;
     real_t **Ac, *bc;
 
+    LIKWID_MARKER_INIT;
+    
     // printf("Digite a ordem da matriz: ");
     scanf("%ld", &n);
 
@@ -27,7 +29,9 @@ int main(int argc, char *argv[])
     copiaEntrada(A, b, Ac, bc, n);
 
     // EG - Pivoteamento
+    LIKWID_MARKER_START ("EG - TRADICIONAL");
     eliminacaoGaussPivoteamento(Ac, bc, n);
+    LIKWID_MARKER_STOP ("EG - TRADICIONAL");
     // // imprimeEntrada(Ac, bc, n);
 
     // // Vetor solucao
@@ -46,7 +50,9 @@ int main(int argc, char *argv[])
     // GS - Iterativo
     real_t *x1 = malloc(n * sizeof(real_t));
     real_t *r1 = malloc(n * sizeof(real_t));
+    LiKWID_MARKER_START ("GS - ITERATIVO");
     iterativoGaussSeidel(Ac, bc, x1, n, 0.0001, 50);
+    LIKWID_MARKER_STOP ("GS - ITERATIVO");
     calculaResiduo(Ac, x1, bc, r1, n);
     imprimeSaida(x1, n, r1);
 
@@ -68,7 +74,9 @@ int main(int argc, char *argv[])
 
     separaDiagonal(Ac, d, a, c, n);
 
+    LIKWID_MARKER_START ("EG - TRIDIAGONAL");
     eliminacaoGaussTridiagonal(d, a, c, bc, x2, n);
+    LIKWID_MARKER_STOP ("EG - TRIDIAGONAL");
     calculaResiduo(Ac, x2, bc, r2, n);
     imprimeSaida(x2, n, r2);
 
@@ -80,7 +88,9 @@ int main(int argc, char *argv[])
     // imprimeEntrada(Ac, bc, n);
     separaDiagonal(Ac, d, a, c, n);
 
+    LIKWID_MARKER_START ("GS - TRIDIAGONAL");
     gaussSeidelTridiagonal(a, bc, c, x3, d, n, 0.0001, 50);
+    LIKWID_MARKER_STOP ("GS - TRIDIAGONAL");
     calculaResiduo(Ac, x3, bc, r3, n);
     imprimeSaida(x3, n, r3);
 
@@ -92,6 +102,8 @@ int main(int argc, char *argv[])
     // Libera memoria alocada
     liberaMemoria(A, b, n);
     liberaMemoria(Ac, bc, n);
+
+    LIKWID_MARKER_CLOSE;
 
     return 0;
 }
