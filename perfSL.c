@@ -172,7 +172,7 @@ void gaussSeidelTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, real_t *
     real_t erro = 1.0 + tol;
     real_t *old_x = malloc(n * sizeof(real_t));
 
-    while (erro < tol && maxIter > 0)
+    while (erro > tol && maxIter > 0)
     {
         for (int_t i = 0; i < n; i++)
         {

@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
     // imprimeEntrada(Ac, bc, n);
     separaDiagonal(Ac, d, a, c, n);
 
-    gaussSeidelTridiagonal(a, d, c, x3, bc, n, 0.0001, 50);
+    gaussSeidelTridiagonal(a, bc, c, x3, d, n, 0.0001, 50);
     calculaResiduo(Ac, x3, bc, r3, n);
     imprimeSaida(x3, n, r3);
 
