@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
     // EG - TRIDIAGONAL
     // Vetores diagonais
-    
+
     copiaEntrada(A, b, Ac, bc, n);
     // imprimeEntrada(Ac, bc, n);
 
@@ -71,13 +71,10 @@ int main(int argc, char *argv[])
     calculaResiduo(Ac, x2, bc, r2, n);
     imprimeSaida(x2, n, r2);
 
-    free(x2);
-    free(r2);
-
     // SG - TRIDIAGONAL
     real_t *r3 = malloc(n * sizeof(real_t));
     real_t *x3 = malloc(n * sizeof(real_t));
-    
+
     copiaEntrada(A, b, Ac, bc, n);
     // imprimeEntrada(Ac, bc, n);
     separaDiagonal(Ac, d, a, c, n);
@@ -86,14 +83,14 @@ int main(int argc, char *argv[])
     calculaResiduo(Ac, x3, bc, r3, n);
     imprimeSaida(x3, n, r3);
 
+    free(x2);
+    free(r2);
     free(r3);
     free(x3);
-    
+
     // Libera memoria alocada
     liberaMemoria(A, b, n);
     liberaMemoria(Ac, bc, n);
-
-    
 
     return 0;
 }
