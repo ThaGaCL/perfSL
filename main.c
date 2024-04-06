@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <likwid.h>
 #include "utils.h"
 #include "perfSL.h"
 #include "matrix.h"

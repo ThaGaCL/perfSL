@@ -189,7 +189,7 @@ void gaussSeidelTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, real_t *
 
         // Calcula erro == norma máxima de ( x^(k) – x^(k-1) )
         erro = maxNorm(x, old_x, n);
-        printf("Erro: %f\n", erro);
+        //printf("Erro: %f\n", erro);
     }
 }
 
