@@ -1,14 +1,19 @@
 # PROGRAMA
     PROG = perfSL
     OBJS = main.o perfSL.o utils.o matrix.o
-
+	
 # Compilador
     CC     = gcc
+	
+	LIKWID_PERFMON = -DLIKWID_PERFMON
+	LIKWID_INCLUDE = /home/soft/likwid/include
+	LIKWID_LIB = /home/soft/likwid/lib
+
 
 # Acrescentar onde apropriado as opções para incluir uso da biblioteca LIKWID
-    CFLAGS = -O0 -g -DLIKWID_PERFMON -I ${LIKWID_INCLUDE} 
-    LFLAGS = -lm
-
+    CFLAGS = -O0 -g -DLIKWID_PERFMON -I${LIKWID_INCLUDE} 
+    LFLAGS = -lm -L${LIKWID_LIB} -llikwid
+	LIKWID_HOME=/home/soft/likwid
 # Lista de arquivos para distribuição
 DISTFILES = *.c *.h LEIAME* Makefile
 DISTDIR = `basename ${PWD}`
