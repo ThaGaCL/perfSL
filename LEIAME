@@ -4,10 +4,4 @@ Alunos:
 	Thales Carvalho
 
 Limitações:
-	Likwid recusa-se a funcionar apesar de todos os parâmetros estarem corretos no makefile, no bashrc
-	do usuário, no script ou direto no terminal, apesar de tudo estar em ordem com as tags no main.c 
-	e a importação de likwid.h
-
-./perfSl < sistemas.dat não dá segmentation fault nem aponta erros de compilação
-
-Para o primeiro caso dos SL tudo em ordem
+	Thales é com você fale sobre 

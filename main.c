@@ -5,6 +5,7 @@
 #include "perfSL.h"
 #include "matrix.h"
 
+
 int main(int argc, char *argv[])
 {
     int_t n;
@@ -16,7 +17,7 @@ int main(int argc, char *argv[])
     double t_time = 0.0;
 
     LIKWID_MARKER_INIT;
-    
+
     // printf("Digite a ordem da matriz: ");
     scanf("%ld", &n);
 
@@ -33,9 +34,11 @@ int main(int argc, char *argv[])
     copiaEntrada(A, b, Ac, bc, n);
 
     // EG - Pivoteamento
-    LIKWID_MARKER_START ("EG_TRADICIONAL");
+    LIKWID_MARKER_START("EG_TRADICIONAL");
+    s_time = timestamp();
     eliminacaoGaussPivoteamento(Ac, bc, n);
-    LIKWID_MARKER_STOP ("EG_TRADICIONAL");
+    e_time = timestamp();
+    LIKWID_MARKER_STOP("EG_TRADICIONAL");
     // // imprimeEntrada(Ac, bc, n);
 
     t_time = e_time - s_time;
@@ -55,10 +58,13 @@ int main(int argc, char *argv[])
     // GS - Iterativo
     real_t *x1 = malloc(n * sizeof(real_t));
     real_t *r1 = malloc(n * sizeof(real_t));
-    LIKWID_MARKER_START ("GS_ITERATIVO");
+    LIKWID_MARKER_START("GS_ITERATIVO");
+    s_time = timestamp();
     iterativoGaussSeidel(Ac, bc, x1, n, 0.0001, 50);
-    LIKWID_MARKER_STOP ("GS_ITERATIVO");
+    e_time = timestamp();
+    LIKWID_MARKER_STOP("GS_ITERATIVO");
     calculaResiduo(Ac, x1, bc, r1, n);
+    t_time = e_time - s_time;
     imprimeSaida(x1, n, r1, t_time);
 
     free(x1);
@@ -79,10 +85,13 @@ int main(int argc, char *argv[])
 
     separaDiagonal(Ac, d, a, c, n);
 
-    LIKWID_MARKER_START ("EG_TRIDIAGONAL");
+    LIKWID_MARKER_START("EG_TRIDIAGONAL");
+    s_time = timestamp();
     eliminacaoGaussTridiagonal(d, a, c, bc, x2, n);
-    LIKWID_MARKER_STOP ("EG_TRIDIAGONAL");
+    e_time = timestamp();
+    LIKWID_MARKER_STOP("EG_TRIDIAGONAL");
     calculaResiduo(Ac, x2, bc, r2, n);
+    t_time = e_time - s_time;
     imprimeSaida(x2, n, r2, t_time);
 
     // SG - TRIDIAGONAL
@@ -93,10 +102,13 @@ int main(int argc, char *argv[])
     // imprimeEntrada(Ac, bc, n);
     separaDiagonal(Ac, d, a, c, n);
 
-    LIKWID_MARKER_START ("GS_TRIDIAGONAL");
+    LIKWID_MARKER_START("GS_TRIDIAGONAL");
+    s_time = timestamp();
     gaussSeidelTridiagonal(a, bc, c, x3, d, n, 0.0001, 50);
-    LIKWID_MARKER_STOP ("GS_TRIDIAGONAL");
+    e_time = timestamp();
+    LIKWID_MARKER_STOP("GS_TRIDIAGONAL");
     calculaResiduo(Ac, x3, bc, r3, n);
+    t_time = e_time - s_time;
     imprimeSaida(x3, n, r3, t_time);
 
     free(x2);

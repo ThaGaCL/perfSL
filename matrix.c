@@ -53,14 +53,14 @@ void copiaEntrada(real_t **A, real_t *b, real_t **Ac, real_t *bc, int_t n){
 
 void imprimeSaida(real_t *x, int_t n, real_t *res, double t_time){
     // printf("Vetor x:\n");
-    printf("%lf ms\n", t_time);
+    printf("%.8lf ms\n", t_time);
     for(int i = 0; i < n; i++){
         printf("%lf ", x[i]);
     }
     printf("\n");
     // printf("\n\nResíduo: \n\n");
     for(int i = 0; i < n; i++){
-        printf("%lf ", res[i]);
+        printf("%.12lf ", res[i]);
     }
     printf("\n");
 }

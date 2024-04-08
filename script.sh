@@ -1,5 +1,7 @@
 #!bin/bash
 
+make purge
+
 METRICA="FLOPS_DP"
 CPU=0
 
@@ -10,7 +12,7 @@ make
 
 for k in $METRICA
 	do
-		likwid-perfctr -C ${CPU} -g ${k} -m ./perfSl < sistemas.dat
+		likwid-perfctr -C ${CPU} -g ${k} -m ./perfSL < sistemas.dat >> ${k}.log
 	done
 
 make clean
