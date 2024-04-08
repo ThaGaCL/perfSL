@@ -11,9 +11,9 @@
 
 
 # Acrescentar onde apropriado as opções para incluir uso da biblioteca LIKWID
-CFLAGS= -g --debug -Wall -O3 -mavx -march=native -I$(LIKWID_HOME)/include -DLIKWID_PERFMON
-LFLAGS= -lm -L$(LIKWID_HOME)/lib -llikwid
-LIKWID_HOME=/home/soft/likwid
+    CFLAGS = -O0 -g -DLIKWID_PERFMON -I${LIKWID_INCLUDE} 
+    LFLAGS = -lm -L${LIKWID_LIB} -llikwid
+	LIKWID_HOME=/home/soft/likwid
 # Lista de arquivos para distribuição
 DISTFILES = *.c *.h LEIAME* Makefile
 DISTDIR = `basename ${PWD}`
