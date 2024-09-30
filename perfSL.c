@@ -79,7 +79,7 @@ void retrosSubs(real_t **A, real_t *b, real_t *x, int_t n)
 
 void iterativoGaussSeidel(real_t **A, real_t *b, real_t *x, int_t n, real_t tol, int_t maxIter)
 {
-    printf("GS classico [ %ld iterações ]:\n", maxIter);
+    printf("GS classico ");
     real_t *x0 = malloc(n * sizeof(real_t));
     real_t erro = tol + 1;
     int_t iter = 0;
@@ -108,6 +108,7 @@ void iterativoGaussSeidel(real_t **A, real_t *b, real_t *x, int_t n, real_t tol,
 
         iter++;
     }
+    printf("[ %ld iterações ]:\n", iter);
 
     free(x0);
 }
@@ -168,12 +169,14 @@ real_t maxNorm(real_t *x, real_t *old_x, int_t n)
 
 void gaussSeidelTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, real_t *d, int_t n, real_t tol, int_t maxIter)
 {
-    printf("GS tridiagonal [ %ld iterações ]:\n", maxIter);
+    printf("GS tridiagonal ");
     real_t erro = 1.0 + tol;
+    int it = 0;
     real_t *old_x = malloc(n * sizeof(real_t));
 
     while (erro > tol && maxIter > 0)
     {
+        it++;
         for (int_t i = 0; i < n; i++)
         {
             old_x[i] = x[i];
@@ -191,6 +194,8 @@ void gaussSeidelTridiagonal(real_t *a, real_t *b, real_t *c, real_t *x, real_t *
         erro = maxNorm(x, old_x, n);
         //printf("Erro: %f\n", erro);
     }
+
+    printf("[ %d iterações ]:\n", it);
 }
 
 void calculaResiduo(real_t **A, real_t *x, real_t *b, real_t *residuo, int_t n)

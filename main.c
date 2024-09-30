@@ -53,7 +53,6 @@ int main(int argc, char *argv[])
     free(r);
 
     copiaEntrada(A, b, Ac, bc, n);
-    // imprimeEntrada(Ac, bc, n);
 
     // GS - Iterativo
     real_t *x1 = malloc(n * sizeof(real_t));
@@ -74,7 +73,6 @@ int main(int argc, char *argv[])
     // Vetores diagonais
 
     copiaEntrada(A, b, Ac, bc, n);
-    // imprimeEntrada(Ac, bc, n);
 
     // GS - TRIDIAGONAL
     real_t *c = malloc((n - 1) * sizeof(real_t));
@@ -121,5 +119,7 @@ int main(int argc, char *argv[])
     liberaMemoria(Ac, bc, n);
 
     LIKWID_MARKER_CLOSE;
+
+    printf("/**/");
     return 0;
 }

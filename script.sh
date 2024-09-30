@@ -12,6 +12,7 @@ make
 
 for k in $METRICA
 	do
+		echo "" > ${k}.log
 		likwid-perfctr -C ${CPU} -g ${k} -m ./perfSL < sistemas.dat >> ${k}.log
 	done
 
